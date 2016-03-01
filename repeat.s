@@ -11,7 +11,7 @@ main:	nop
 	pushq %rbp
 	movq %rsp, %rbp
 
-L1: nop
+.L1: nop
 	# loop body
 	
 	# (a > -20) and ((a < -10) or (a > 20))
@@ -59,9 +59,9 @@ L1: nop
 	andl %ecx, %eax
 
 	test %eax, %eax # Set ZF to 1 if %eax == 0
-	je L1			# Jump to L1 if ZF == 1
+	je .L1			# Jump to L1 if ZF == 1
 
-L2: nop
+.L2: nop
 	# after loop
 
 	leave

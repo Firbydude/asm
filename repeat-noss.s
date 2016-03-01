@@ -12,7 +12,7 @@ main:	nop
 	pushq %rbp
 	movq %rsp, %rbp
 
-L1: nop
+.L1: nop
 	# loop body
 	
 	# (a > -20) and ((a < -10) or (a > 20))
@@ -46,7 +46,7 @@ L1: nop
 	# Short-circuit the and
 	# If 0 then jump to top
 	test %ecx, %ecx # Set ZF to 1 if %ecx == 0
-	je L1			# Jump to L2 if ZF == 1
+	je .L1			# Jump to L2 if ZF == 1
 
 	# (a < -10) into %edx
 	cmpl $-10, %eax
@@ -56,7 +56,7 @@ L1: nop
 	# Short-circuit the or
 	# If 1 then jump to end
 	cmpl $1, %edx # Set ZF to 1 if %edx == 1
-	je L2		  # Jump to L2 if ZF == 1
+	je .L2		  # Jump to L2 if ZF == 1
 
 	# (a > 20) into %eax
 	cmpl $20, %eax
@@ -66,9 +66,9 @@ L1: nop
 	# Use %eax as condition
 	# If 0 then jump to top
 	test %eax, %eax # Set ZF to 1 if %eax == 0
-	je L1			# Jump to L1 if ZF == 1
+	je .L1			# Jump to L1 if ZF == 1
 
-L2: nop
+.L2: nop
 	# after loop
 
 	leave
